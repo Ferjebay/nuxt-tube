@@ -14,7 +14,8 @@
           <path d="M21,6H3V5h18V6z M21,11H3v1h18V11z M21,17H3v1h18V17z" class="style-scope yt-icon"></path>
         </g>
       </svg>
-      <svg class="w-24 h-6 fill-white" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
+      <svg @click="$router.push('/')" 
+        class="w-24 h-6 fill-white cursor-pointer" viewBox="0 0 90 20" xmlns="http://www.w3.org/2000/svg">
         <g viewBox="0 0 90 20" preserveAspectRatio="xMidYMid meet" class="style-scope yt-icon">
           <g class="style-scope yt-icon">
             <path
