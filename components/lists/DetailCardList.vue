@@ -8,7 +8,7 @@
 
 <template>
   <div class="flex flex-col w-full">
-    <div class="relative" style="width: max-content;">
+    <div class="relative">
 
       <!-- Image Video -->
       <NuxtLink :to="{ name: 'watch-id', params: { id: item.id } }">

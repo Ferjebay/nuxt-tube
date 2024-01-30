@@ -80,7 +80,7 @@
         </div>
       
         <div class="grid grid-cols-12 gap-2 gap-y-4">
-          <div class="col-span-12 sm:col-span-12 md:col-span-8">
+          <div class="col-span-12 sm:col-span-12 md:col-span-12">
             <div class="max-w-2xl mx-auto bg-gray-900 p-6 rounded-md shadow-md my-3 card-description">
               <div class="flex">
                 <div class="flex-grow">
@@ -108,7 +108,7 @@
         </div>
 
         <div class="grid grid-cols-12 gap-2 gap-y-4">
-          <div class="col-span-12 sm:col-span-12 md:col-span-8">
+          <div class="col-span-12 sm:col-span-12 md:col-span-12">
             <comments :commentCount="commentCount" />
           </div>
         </div>
@@ -123,8 +123,8 @@
 
           <template v-else>
             <div v-for="(item, index) in items" :key="index"
-              class="col-span-12 sm:col-span-12 md:col-span-8">
-              <lists-detail-card-list  :item="item"/>
+              class="col-span-12 sm:col-span-12 md:col-span-12">
+              <lists-detail-card-list :item="item"/>
             </div>
           </template>
 
