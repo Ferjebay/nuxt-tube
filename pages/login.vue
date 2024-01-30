@@ -4,6 +4,7 @@
     })
 
     const store = useAuthStore();
+    const keyFirebase = useRuntimeConfig().public.keyFirebase;
 
     const user = ref({
       email: '',
@@ -11,7 +12,7 @@
     })
 
     const login = () => {
-      store.login( user.value );
+      store.login( user.value, keyFirebase );
     }
 
   </script>
@@ -34,21 +35,16 @@
           type="password" id="password" class="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring focus:border-blue-300">
       </div>
 
-      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">Iniciar Sesión</button>
-    </form>
-
-    <!-- <div class="mt-4 flex items-center justify-between">
-      <hr class="flex-grow border-t">
-      <span class="mx-2 text-gray-500">o</span>
-      <hr class="flex-grow border-t">
-    </div>
-
-    <div class="mt-4">
-      <button class="w-full bg-white text-gray-700 p-2 border rounded-md hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/800px-Google_2015_logo.svg.png" alt="Google Icon" class="inline-block w-5 h-5 mr-2">
-        Iniciar Sesión con Google
+      <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600     focus:outline-none focus:ring focus:border-blue-300">
+        Iniciar Sesión
       </button>
-    </div> -->
+
+      <button @click="$router.push('/')"
+        type="button" class="w-full bg-gray-500 mt-4 text-white p-2 rounded-md hover:bg-gray-600     focus:outline-none focus:ring focus:border-blue-300">
+        Cancelar
+      </button>
+
+    </form>
 
   </div>
 </div>

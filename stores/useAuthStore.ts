@@ -1,4 +1,4 @@
-import authApi from '@/api/authApi.ts';
+import { useAuthApi } from "../composables/useAuthApi"
 import { defineStore } from 'pinia'
 
 const { showAlert } = useHelpers();
@@ -6,12 +6,14 @@ const { showAlert } = useHelpers();
 export const useAuthStore = defineStore('useAuthStore', {
   state: () => ({
     estado: 'not-authenticated',
-    usuario: null
+    usuario: null,
+    videos: []
   }),
   persist: true,
   getters: { },
   actions: {
-    async login(user: { email: string, password: string }) {
+    async login(user: { email: string, password: string }, keyFirebase: string) {
+      const { authApi } = useAuthApi( keyFirebase );
       const { email, password } = user;
 
       try {

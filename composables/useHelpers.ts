@@ -34,7 +34,6 @@ export const useHelpers = () => {
     });
 
     Toast.fire({ icon: type, title: msg });
-
   }
 
   return {

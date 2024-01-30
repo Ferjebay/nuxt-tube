@@ -1,8 +1,11 @@
 <script setup lang="ts">
 
-
+  const authStore = useAuthStore();
+  const showModal = ref( false );
+  
 
 </script>
+
 <template>
   <nav class="flex px-5 py-3 text-white bg-[#202020]">
     <div class="flex w-80 py-2">
@@ -70,36 +73,53 @@
           </svg>
         </button>
       </div>
-
     </div>
 
     <div class="w-80 flex justify-end">
       <ul class="flex justify-center items-center space-x-6">
-        <li >
+        <li>
           <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <g class="style-scope yt-icon"><path d="M14,13h-3v3H9v-3H6v-2h3V8h2v3h3V13z M17,6H3v12h14v-6.39l4,1.83V8.56l-4,1.83V6 M18,5v3.83L22,7v8l-4-1.83V19H2V5H18L18,5 z" class="style-scope yt-icon"></path></g>
           </svg>
         </li>
-        <li >
+        <li>
           <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <g class="style-scope yt-icon"><path d="M16,4v4h4V4H16z M19,7h-2V5h2V7z M16,10v4h4v-4H16z M19,13h-2v-2h2V13z M10,4v4h4V4H10z M13,7h-2V5h2V7z M10,10v4h4v-4H10z M13,13h-2v-2h2V13z M16,16v4h4v-4H16z M19,19h-2v-2h2V19z M10,16v4h4v-4H10z M13,19h-2v-2h2V19z M4,4v4h4V4H4z M7,7H5V5h2V7z M4,10 v4h4v-4H4z M7,13H5v-2h2V13z M4,16v4h4v-4H4z M7,19H5v-2h2V19z" class="style-scope yt-icon"></path></g>
           </svg>
         </li>
-        <li >
+        <li>
           <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <g class="style-scope yt-icon"><path d="M10,20h4c0,1.1-0.9,2-2,2S10,21.1,10,20z M20,17.35V19H4v-1.65l2-1.88v-5.15c0-2.92,1.56-5.22,4-5.98V3.96 c0-1.42,1.49-2.5,2.99-1.76C13.64,2.52,14,3.23,14,3.96l0,0.39c2.44,0.75,4,3.06,4,5.98v5.15L20,17.35z M19,17.77l-2-1.88v-5.47 c0-2.47-1.19-4.36-3.13-5.1c-1.26-0.53-2.64-0.5-3.84,0.03C8.15,6.11,7,7.99,7,10.42v5.47l-2,1.88V18h14V17.77z" class="style-scope yt-icon"></path></g>
           </svg>
         </li>
         <li >
-          <button @click="$router.push('/login')"
-            class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-2 py-1 rounded-full flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <circle cx="12" cy="12" r="10" stroke-width="2" class="text-blue-500" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z" />
+          <button v-if=" authStore.estado != 'authenticated'"
+            @click="$router.push('/login')"
+            class="border border-blue-500 text-blue-500 px-2 py-1 rounded-full flex items-center">
+            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="18px" height="18px" viewBox="0 0 510 510" style="enable-background:new 0 0 510 510;" xml:space="preserve" fill="#3b82f6">
+            <g>
+              <g id="account-circle">
+                <path d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M255,76.5c43.35,0,76.5,33.15,76.5,76.5s-33.15,76.5-76.5,76.5c-43.35,0-76.5-33.15-76.5-76.5S211.65,76.5,255,76.5z M255,438.6
+                  c-63.75,0-119.85-33.149-153-81.6c0-51,102-79.05,153-79.05S408,306,408,357C374.85,405.45,318.75,438.6,255,438.6z"/>
+              </g>
+            </g>    
             </svg>
-            Acceder
+            &nbsp;Acceder
           </button>
-          <!-- <img class="rounded-full w-7 h-7" src="~/assets/img/leon.jpg" /> -->
+
+          <div v-else class="relative">
+            <img @click="showModal = !showModal"
+              src="~/assets/img/leon.jpg" alt="Imagen" class="rounded-full w-8 h-8 cursor-pointer"/>
+
+            <div v-if="showModal" class="absolute bg-white p-2 rounded-md shadow-md mt-2 px-14" 
+              style="z-index: 1000;right: -7px;background-color: #363636;">
+              <button style="width: 95px;font-size: 14px;"
+                @click="authStore.$reset()"
+                class="block mb-2">
+                Cerrar Sesión
+              </button>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
