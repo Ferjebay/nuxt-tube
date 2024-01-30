@@ -1,16 +1,18 @@
 <template>
 
-  <aside class="w-72 h-full bg-[#202020]" aria-label="Sidebar">
+  <aside class="w-72 bg-[#202020]" aria-label="Sidebar">
     <div class="pr-3 py-3 overflow-y-auto ">
       <ul class="">
-        <li>
+        <li @click="$router.push('/')">
           <a href="#" class="flex items-center py-2 pl-5 text-sm font-normal text-white bg-[#363636]">
             <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <g>
                 <path d="M4,10V21h6V15h4v6h6V10L12,3Z"></path>
               </g>
             </svg>
-            <span class="ml-5">Home</span>
+            <span class="ml-5">
+              Home
+            </span>
           </a>
         </li>
         <li>

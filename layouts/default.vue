@@ -1,13 +1,12 @@
 <template>
-  <div class="flex flex-col h-full min-h-screen bg-[#181818]">
+  <div class="flex flex-col h-full min-h-screen bg-[#181818]"> 
     <navbars-detail-top-navbar/>
-    <div class="flex flex-row w-full h-screen">
+    <div class="flex flex-row w-full ">
       <navbars-detail-side-navbar/>
-      <div class="flex flex-col w-full h-full">
+      <div class="flex flex-col w-full ">
         <banners-detail-tag-banner/>
 
-        <lists-detail-card-list></lists-detail-card-list>
-        <!-- <router-view></router-view> -->
+        <router-view></router-view>
 
       </div>
     </div>

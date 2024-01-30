@@ -1,0 +1,108 @@
+<script setup>
+  import axios from "axios";
+  import { useRoute } from "vue-router";
+  import { ref, watch } from 'vue';
+
+  const { formatarNumeroAbreviado } = useHelpers();
+  const route = useRoute();
+  const items = ref([]);
+  const item = ref({});
+  const loading = ref( true );
+  const totalSuscriptores = ref(0)
+
+  const getVideo = async () => {
+    const { data: { items } } = await axios.get(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${ route.params.id }&key=AIzaSyAT_zkg_05bcxB_OnCYnjzNVF4PClBLWKk`)
+    
+    item.value = items[0];
+    totalSuscriptores.value = item.value.statistics.likeCount
+  }
+  
+  const getVideos = async () => {
+    const { data } = await axios.get('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyAT_zkg_05bcxB_OnCYnjzNVF4PClBLWKk');
+    
+    items.value = data.items;
+    
+    loading.value = false;
+  }
+
+  watch( () => route.params.id, ( video_id ) => {
+      getVideo();
+    }
+  );
+  
+  getVideo();
+  getVideos();
+
+</script>
+
+<template>
+  <div class="flex justify-center p-5 bg-[#181818]">
+    <div class="grid grid-cols-12 gap-2 gap-y-4">
+
+      <div class="col-span-8 sm:col-span-12 md:col-span-8">
+        <div class="flex flex-col w-full">
+          <iframe width="100%" height="315" 
+            :src='`https://www.youtube.com/embed/${ route.params.id }`' 
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+          </iframe>       
+          <h4 class="text-white mt-2 ml-1">
+            {{ item.snippet?.title }}
+          </h4> 
+          <div class="flex flex-row gap-2 mt-2">
+
+          <!-- Profile Picture -->
+          <NuxtLink to="/watch/1">
+            <img src="https://img.freepik.com/vector-gratis/hermosa-casa_24877-50819.jpg" class="rounded-full max-h-10 max-w-10" />
+          </NuxtLink>
+
+          <!-- Description -->
+          <div clas="flex flex-col">
+            <a href="#">
+              <p class="text-sm font-semibold text-gray-100">
+                {{ item.snippet?.channelTitle }}
+              </p>
+            </a>
+            <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#">
+              {{ formatarNumeroAbreviado( totalSuscriptores ) }} Suscriptors
+            </a>
+          </div>
+
+          <div class="max-w-2xl mx-auto bg-gray-900 p-6 rounded-md shadow-md my-8">
+            <div class="flex">
+              <div class="flex-grow">
+                <h2 class="text-2xl font-bold mb-2">Título del Video</h2>
+                <p class="text-gray-700 mb-4">Descripción del video. Puedes agregar más texto aquí para proporcionar detalles sobre el contenido del video.</p>
+                <p class="text-gray-500">Fecha de publicación: 29 de enero de 2024</p>
+              </div>
+            </div>
+          </div>
+
+          </div>  
+        </div>
+      </div>
+
+      <div class="col-span-12 sm:col-span-6 md:col-span-4 pl-12 pr-8">
+        <div class="grid grid-cols-12 gap-2 gap-y-4">          
+
+          <template v-if="loading">
+            <lists-skeleton />
+          </template>
+
+          <template v-else>
+            <div v-for="(item, index) in items" :key="index"
+              class="col-span-12 sm:col-span-6 md:col-span-12">
+              <lists-detail-card-list  :item="item"/>
+            </div>
+          </template>
+
+        </div>          
+      </div>
+
+    </div>
+  </div>
+</template>
+
+
+<style lang="scss" scoped>
+
+</style>

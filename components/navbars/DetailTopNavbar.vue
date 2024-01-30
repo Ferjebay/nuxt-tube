@@ -1,3 +1,8 @@
+<script setup lang="ts">
+
+
+
+</script>
 <template>
   <nav class="flex px-5 py-3 text-white bg-[#202020]">
     <div class="flex w-80 py-2">
@@ -86,7 +91,15 @@
           </svg>
         </li>
         <li >
-          <img class="rounded-full w-7 h-7" src="~/assets/img/leon.jpg" />
+          <button @click="$router.push('/login')"
+            class="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-2 py-1 rounded-full flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <circle cx="12" cy="12" r="10" stroke-width="2" class="text-blue-500" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6z" />
+            </svg>
+            Acceder
+          </button>
+          <!-- <img class="rounded-full w-7 h-7" src="~/assets/img/leon.jpg" /> -->
         </li>
       </ul>
     </div>

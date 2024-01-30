@@ -2,12 +2,16 @@
   import axios from "axios";
 
   const loading = ref( true );
+  const items = ref([]);
 
   const getVideos = async () => {
 
-    const data = await axios.get('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyBKHMlGEvmGWy0kXyyLi6djkPHZYGuNHjw');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    const { data } = await axios.get('https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=US&key=AIzaSyAT_zkg_05bcxB_OnCYnjzNVF4PClBLWKk');
     
-    console.log( data );
+    items.value = data.items;
+
     loading.value = false;
   }
 
@@ -15,15 +19,24 @@
 
 </script>
 <template>
-  <!-- <template v-if="loading">
-    <lists-skeleton />
+  <template v-if="loading">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-4 mt-4">
+      <lists-skeleton />
+    </div>
   </template>
+  
   <template v-else>
+
     <div class="flex justify-center p-5 bg-[#181818]">
       <div class="grid max-w-6xl grid-cols-12 gap-2 gap-y-4">
-        <lists-detail-card-list />
+        <div v-for="(item, index) in items" :key="index"
+          class="col-span-12 sm:col-span-6 md:col-span-3">
+          <lists-detail-card-list  :item="item"/>
+        </div>
       </div>
     </div>
-  </template> -->
+
+  </template>
+
 </template>
 

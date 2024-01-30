@@ -1,290 +1,46 @@
+<script setup>
+  import moment from "moment";
+
+  const { item } = defineProps(['item']);
+  const { formatarNumeroAbreviado, convertirDuracion } = useHelpers();
+
+</script>
+
 <template>
-  <div class="flex justify-center p-5 bg-[#181818]">
-    <div class="grid max-w-6xl grid-cols-12 gap-2 gap-y-4">
+  <div class="flex flex-col w-full">
+    <div class="relative">
 
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
+      <!-- Image Video -->
+      <NuxtLink :to="{ name: 'watch-id', params: { id: item.id } }">
+        <img :src="item.snippet.thumbnails.medium.url" class="h-auto w-96" />
+      </NuxtLink>
 
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/59/300/200" class="h-auto w-96" />
-            </a>
+      <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">
+        {{ convertirDuracion( item.contentDetails.duration ) }}
+      </p>
+    </div>
 
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
+    <div class="flex flex-row gap-2 mt-2">
 
-          <div class="flex flex-row gap-2 mt-2">
+      <!-- Profile Picture -->
+      <NuxtLink to="/watch/1">
+        <img src="https://picsum.photos/seed/1/40/40" class="rounded-full max-h-10 max-w-10" />
+      </NuxtLink>
 
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/1/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
+      <!-- Description -->
+      <div clas="flex flex-col">
+        <a href="#">
+          <p class="text-sm font-semibold text-gray-100">
+            {{ item.snippet.title }}
+          </p>
+        </a>
+        <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#">
+          {{ item.snippet.channelTitle }}
+        </a>
+        <p class="mt-1 text-xs text-gray-400">{{ formatarNumeroAbreviado(item.statistics.viewCount) }} views . {{ moment(item.snippet.publishedAt, "YYYYMMDD").fromNow() }}</p>
       </div>
 
-      <!-- Video 2 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/60/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/4/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Video 3 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/22/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/88/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Video 4 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/90/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/57/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-
-
-        </div>
-      </div>
-
-      <!-- Video 1 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/59/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/1/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Video 2 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/60/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/4/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Video 3 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/22/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/88/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <!-- Video 4 -->
-      <div class="col-span-12 sm:col-span-6 md:col-span-3">
-        <div class="flex flex-col w-full">
-          <div class="relative">
-
-            <!-- Image Video -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/90/300/200" class="h-auto w-96" />
-            </a>
-
-            <p class="absolute px-1 text-xs text-gray-100 bg-gray-900 right-2 bottom-2 py">1:15</p>
-          </div>
-
-          <div class="flex flex-row gap-2 mt-2">
-
-            <!-- Profile Picture -->
-            <a href="#">
-              <img src="https://picsum.photos/seed/57/40/40" class="rounded-full max-h-10 max-w-10" />
-            </a>
-
-            <!-- Description -->
-            <div clas="flex flex-col">
-              <a href="#">
-                <p class="text-sm font-semibold text-gray-100">Tailwind CSS: ZERO to HERO</p>
-              </a>
-              <a class="mt-2 text-xs text-gray-400 hover:text-gray-100" href="#"> Leon To </a>
-              <p class="mt-1 text-xs text-gray-400">241K views . 3 years ago</p>
-            </div>
-
-          </div>
-
-
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
-
-<script>
-  export default {
-    data() {
-      return {
-        video: [{
-          thumbnail: 'https://picsum.photos/seed/57/40/40',
-          title: "It's time to say goodbye to Bootstrap",
-          views: 123,
-          time: 1,
-        }]
-      }
-    },
-    setup() {},
-  }
-</script>
